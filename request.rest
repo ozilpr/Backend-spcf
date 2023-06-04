@@ -1,0 +1,91 @@
+### HPT TEST ############################################
+GET http://localhost:5000/get-hpt
+
+###
+GET http://localhost:5000/get-hptbyid?id=13
+
+
+
+
+### RULES TEST ############################################
+GET http://localhost:5000/get-rls
+
+###
+GET http://localhost:5000/get-rlsbyid?id=13
+
+###
+GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=4
+
+
+
+
+### EVD TEST ############################################
+GET http://localhost:5000/get-evd
+
+###
+GET http://localhost:5000/get-evdbyid?id=37
+
+###
+POST http://localhost:5000/delete-evd?id=90
+
+
+
+
+### USER TEST ############################################
+GET http://localhost:5000/get-user
+
+###
+GET http://localhost:5000/get-userbyid?id=2
+
+###
+GET http://localhost:5000/get-userbyuuid?uuid=6265f8c6-64a5-456f-9402-13901d815e72
+
+###
+GET http://localhost:5000/get-userbykodereg?kode_reg=1
+
+###
+POST http://localhost:5000/add-user
+Content-Type: application/json
+
+{
+    "kode_reg" : "1",
+    "name" : "user1",
+    "password" : "user1",
+    "confPassword" : "user1",
+    "phone" : "",
+    "role" : "user"
+}
+
+###
+POST http://localhost:5000/edit-user?id=2
+Content-Type: application/json
+
+{
+    "kode_reg" : "1",
+    "name" : "user1",
+    "password" : "user1",
+    "confPassword" : "user1",
+    "phone" : "",
+    "role" : "user"
+}
+
+###
+POST http://localhost:5000/delete-user?id=9
+
+
+
+
+### AUTH TEST ############################################
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "kode_reg" : "0",
+    "password" : "admindutapetshop"
+}
+
+###
+GET  http://localhost:5000/me
+
+###
+DELETE http://localhost:5000/logout
