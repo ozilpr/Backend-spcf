@@ -1,8 +1,50 @@
+### AUTH TEST ############################################
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "kode_pendaftaran" : "1",
+    "password" : "user1"
+}
+
+###
+GET  http://localhost:5000/me
+
+###
+DELETE http://localhost:5000/logout
+
+
 ### HPT TEST ############################################
 GET http://localhost:5000/get-hpt
 
 ###
 GET http://localhost:5000/get-hptbyid?id=13
+
+###
+POST http://localhost:5000/add-hpt
+Content-Type: application/json
+
+{
+    "kode_penyakit": "kode",
+    "nama_penyakit": "namapenyakit",
+    "detail_penyakit": "123",
+    "sm_penyakit": "123"
+
+}
+###
+POST http://localhost:5000/edit-hpt?id=17
+Content-Type: application/json
+
+{
+    "kode_penyakit": "new",
+    "nama_penyakit": "new",
+    "detail_penyakit": "123",
+    "sm_penyakit": "123"
+}
+
+###
+POST http://localhost:5000/delete-hpt?id=17
+
 
 
 
@@ -11,11 +53,39 @@ GET http://localhost:5000/get-hptbyid?id=13
 GET http://localhost:5000/get-rls
 
 ###
-GET http://localhost:5000/get-rlsbyid?id=13
+GET http://localhost:5000/get-rlsbyid?id=67
+
+### 200
+GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=4
+### 404
+GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=46
 
 ###
-GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=4
+POST http://localhost:5000/add-rls
+Content-Type: application/json
 
+{
+    "kode_rule": "kode",
+    "penyakit_id": "1",
+    "gejala_id": "46",
+    "mb": "0.10",
+    "md": "0.09"
+}
+
+### edit
+POST http://localhost:5000/edit-rls?id=67
+Content-Type: application/json
+
+{
+    "kode_rule": "new",
+    "penyakit_id": "1",
+    "gejala_id": "46",
+    "mb": "0.8",
+    "md": "0.00"
+}
+
+###
+POST http://localhost:5000/delete-rls?id=67
 
 
 
@@ -23,7 +93,7 @@ GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=4
 GET http://localhost:5000/get-evd
 
 ###
-GET http://localhost:5000/get-evdbyid?id=37
+GET http://localhost:5000/get-evdbyid?id=47
 
 ###
 POST http://localhost:5000/delete-evd?id=90
@@ -38,54 +108,36 @@ GET http://localhost:5000/get-user
 GET http://localhost:5000/get-userbyid?id=2
 
 ###
-GET http://localhost:5000/get-userbyuuid?uuid=6265f8c6-64a5-456f-9402-13901d815e72
+# GET http://localhost:5000/get-userbyuuid?uuid=6265f8c6-64a5-456f-9402-13901d815e72
 
 ###
-GET http://localhost:5000/get-userbykodereg?kode_reg=1
+# GET http://localhost:5000/get-userbykodereg?kode_reg=1
 
 ###
 POST http://localhost:5000/add-user
 Content-Type: application/json
 
 {
-    "kode_reg" : "1",
-    "name" : "user1",
-    "password" : "user1",
-    "confPassword" : "user1",
-    "phone" : "",
+    "kode_reg" : "69",
+    "name" : "user69",
+    "password" : "user69",
+    "confPassword" : "user69",
+    "phone" : "086969696969",
     "role" : "user"
 }
 
 ###
-POST http://localhost:5000/edit-user?id=2
+POST http://localhost:5000/edit-user?id=3
 Content-Type: application/json
 
 {
-    "kode_reg" : "1",
+    "kode_pendaftaran" : "123",
     "name" : "user1",
     "password" : "user1",
     "confPassword" : "user1",
-    "phone" : "",
+    "phone" : "0808088080",
     "role" : "user"
 }
 
 ###
 POST http://localhost:5000/delete-user?id=9
-
-
-
-
-### AUTH TEST ############################################
-POST http://localhost:5000/login
-Content-Type: application/json
-
-{
-    "kode_reg" : "0",
-    "password" : "admindutapetshop"
-}
-
-###
-GET  http://localhost:5000/me
-
-###
-DELETE http://localhost:5000/logout

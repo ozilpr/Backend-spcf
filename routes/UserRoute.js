@@ -2,20 +2,20 @@ import express from 'express'
 import {
   getUser,
   getUserById,
-  getUserByKodeReg,
-  getUserByUuid,
+  // getUserByKodeReg,
+  // getUserByUuid,
   addUser,
   editUser,
   deleteUser,
-} from '../controller/User.js'
+} from '../controllers/User.js'
 import { verifyUser, adminOnly } from '../middleware/AuthUser.js'
 
 const router = express.Router()
 
 router.get('/get-user', verifyUser, adminOnly, getUser)
-router.get('/get-userbyid', getUserById)
-router.get('/get-userbykodereg', getUserByKodeReg)
-router.get('/get-userbyuuid', getUserByUuid)
+router.get('/get-userbyid', verifyUser, adminOnly, getUserById)
+// router.get('/get-userbykodereg', getUserByKodeReg)
+// router.get('/get-userbyuuid', getUserByUuid)
 router.post('/add-user', verifyUser, adminOnly, addUser)
 router.post('/edit-user', verifyUser, adminOnly, editUser)
 router.post('/delete-user', verifyUser, adminOnly, deleteUser)

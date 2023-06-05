@@ -1,26 +1,26 @@
-import { conn } from '../config/Database.js'
-import axios from 'axios'
+// import { conn } from '../config/Database.js'
+// import axios from 'axios'
 import argon2 from 'argon2'
+import { Op } from 'sequelize'
+import User from '../models/UserModel.js'
 
 export const Login = async (req, res) => {
-  const { kode_reg, password } = req.body
-  const getUser = await axios.get(
-    `http://localhost:5000/get-userbykodereg?kode_reg=${kode_reg}`
-  )
-  const user = getUser.data[0]
-
+  const user = await User.findOne({
+    attributes: ['uuid', 'kode_pendaftaran', 'nama_user', 'password', 'role'],
+    where: {
+      kode_pendaftaran: req.body.kode_pendaftaran,
+    },
+  })
   if (!user) return res.status(404).json({ msg: 'User tidak ditemukan' })
 
-  const match = await argon2.verify(user.password, password)
+  const match = await argon2.verify(user.password, req.body.password)
   if (!match) return res.status(400).json({ msg: 'Password salah' })
 
   req.session.userId = user.uuid
   const kode = user.kode_pendaftaran
   const name = user.nama_user
-  const phone = user.no_hp
   const role = user.role
-
-  res.status(200).json({ kode_reg: kode, name: name, phone: phone, role: role })
+  res.status(200).json({ kode_pendaftaran: kode, nama_user: name, role: role })
 }
 
 export const Me = async (req, res) => {
@@ -28,19 +28,14 @@ export const Me = async (req, res) => {
     return res.status(401).json({ msg: 'Mohon login ke akun Anda' })
   }
 
-  const getUser = await axios.get(
-    `http://localhost:5000/get-userbyuuid?uuid=${req.session.userId}`
-  )
-
-  const user = getUser.data[0]
-
-  if (!user) return res.status(404).json({ msg: 'User tidak ditemukan' })
-  res.status(200).json({
-    uuid: user.uuid,
-    kode_reg: user.kode_pendaftaran,
-    name: user.nama_user,
-    role: user.role,
+  const user = await User.findOne({
+    attributes: ['uuid', 'kode_pendaftaran', 'nama_user', 'role'],
+    where: {
+      uuid: req.session.userId,
+    },
   })
+  if (!user) return res.status(404).json({ msg: 'User tidak ditemukan' })
+  res.status(200).json(user)
 }
 
 export const logOut = (req, res) => {

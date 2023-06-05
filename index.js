@@ -2,27 +2,32 @@ import express from 'express'
 import cors from 'cors'
 import session from 'express-session'
 import dotenv from 'dotenv'
-import { conn } from './config/Database.js'
-import MySQLStore from 'express-mysql-session'
+import db from './config/Database.js'
+import SequelizeStore from 'connect-session-sequelize'
 import EvidenceRoute from './routes/EvidenceRoute.js'
 import HipotesaRoute from './routes/HipotesaRoute.js'
 import RulesRoute from './routes/RulesRoute.js'
 import UserRoute from './routes/UserRoute.js'
 import AuthRoute from './routes/AuthRoute.js'
+// import db from './config/Database.js'
 
 dotenv.config()
 
 const app = express()
 
-const MySQLStoreSession = new MySQLStore(session)
-const sessionStore = new MySQLStoreSession({}, conn)
-
+const sessionStore = new SequelizeStore(session.Store)
+const store = new sessionStore({
+  db: db,
+})
+// ;(async () => {
+//   await db.sync()
+// })()
 app.use(
   session({
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: sessionStore,
+    store: store,
     cookie: {
       secure: 'auto',
     },
@@ -42,7 +47,7 @@ app.use(HipotesaRoute)
 app.use(RulesRoute)
 app.use(UserRoute)
 app.use(AuthRoute)
-
+// store.sync()
 app.listen(process.env.APP_PORT, () => {
   console.log('Server up and running...')
 })
