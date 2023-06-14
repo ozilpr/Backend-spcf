@@ -16,6 +16,7 @@ export const getUser = async (req, res) => {
       ],
       where: {
         kode_pendaftaran: { [Op.not]: null },
+        role: { [Op.not]: 'admin' },
         deleted_at: {
           [Op.is]: null,
         },
@@ -23,7 +24,33 @@ export const getUser = async (req, res) => {
     })
     res.status(200).json(response)
   } catch (error) {
-    res.status(500).json({ msg: error.message })
+    res.status(400).json({ msg: error.message })
+  }
+}
+
+// Read
+export const getUserByFirstLetter = async (req, res) => {
+  const { letter } = req.query
+  try {
+    const response = await User.findAll({
+      attributes: [
+        'id',
+        'uuid',
+        'kode_pendaftaran',
+        'nama_user',
+        'no_hp',
+        'role',
+      ],
+      where: {
+        nama_user: { [Op.startsWith]: letter },
+        deleted_at: {
+          [Op.is]: null,
+        },
+      },
+    })
+    res.status(200).json(response.length + 1)
+  } catch (error) {
+    res.status(400).json({ msg: error.message })
   }
 }
 
@@ -54,7 +81,8 @@ export const getUserById = async (req, res) => {
 
 // Create
 export const addUser = async (req, res) => {
-  const { kode_reg, name, password, confPassword, phone, role } = req.body
+  const { kode_pendaftaran, nama_user, password, confPassword, no_hp, role } =
+    req.body
   if (password !== confPassword)
     return res
       .status(400)
@@ -64,10 +92,10 @@ export const addUser = async (req, res) => {
 
   try {
     await User.create({
-      kode_pendaftaran: kode_reg,
-      nama_user: name,
+      kode_pendaftaran: kode_pendaftaran,
+      nama_user: nama_user,
       password: hashPassword,
-      no_hp: phone,
+      no_hp: no_hp,
       role: role,
     })
     res.status(201).json({ msg: 'Register Berhasil' })
@@ -89,7 +117,7 @@ export const editUser = async (req, res) => {
 
   if (!user) return res.status(404).json({ msg: 'User tidak ditemukan' })
 
-  const { kode_pendaftaran, name, password, confPassword, phone, role } =
+  const { kode_pendaftaran, nama_user, password, confPassword, no_hp, role } =
     req.body
 
   let hashPassword
@@ -109,9 +137,9 @@ export const editUser = async (req, res) => {
     await User.update(
       {
         kode_pendaftaran: kode_pendaftaran,
-        nama_user: name,
+        nama_user: nama_user,
         password: hashPassword,
-        no_hp: phone,
+        no_hp: no_hp,
         role: role,
       },
       {

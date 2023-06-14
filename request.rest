@@ -53,7 +53,7 @@ POST http://localhost:5000/delete-hpt?id=17
 GET http://localhost:5000/get-rls
 
 ###
-GET http://localhost:5000/get-rlsbyid?id=67
+GET http://localhost:5000/get-rlsbyid?id=1
 
 ### 200
 GET http://localhost:5000/get-rlsbydata?penyakit_id=1&gejala_id=4
@@ -73,15 +73,15 @@ Content-Type: application/json
 }
 
 ### edit
-POST http://localhost:5000/edit-rls?id=67
+POST http://localhost:5000/edit-rls?id=74
 Content-Type: application/json
 
 {
     "kode_rule": "new",
-    "penyakit_id": "1",
-    "gejala_id": "46",
-    "mb": "0.8",
-    "md": "0.00"
+    "penyakit_id": "20",
+    "gejala_id": "2",
+    "mb": "1",
+    "md": ""
 }
 
 ###
@@ -108,6 +108,9 @@ GET http://localhost:5000/get-user
 GET http://localhost:5000/get-userbyid?id=2
 
 ###
+GET http://localhost:5000/get-userbyfirstletter?letter=a
+
+###
 # GET http://localhost:5000/get-userbyuuid?uuid=6265f8c6-64a5-456f-9402-13901d815e72
 
 ###
@@ -118,12 +121,12 @@ POST http://localhost:5000/add-user
 Content-Type: application/json
 
 {
-    "kode_reg" : "69",
-    "name" : "user69",
-    "password" : "user69",
-    "confPassword" : "user69",
-    "phone" : "086969696969",
-    "role" : "user"
+    "kode_pendaftaran" : "admin",
+    "nama_user" : "!admin",
+    "password" : "admin",
+    "confPassword" : "admin",
+    "no_hp" : "adminadmin",
+    "role" : "admin"
 }
 
 ###
