@@ -5,15 +5,19 @@ import { Op } from 'sequelize'
 import User from '../models/UserModel.js'
 
 export const Login = async (req, res) => {
+  const { password, kode_pendaftaran } = req.body
   const user = await User.findOne({
     attributes: ['uuid', 'kode_pendaftaran', 'nama_user', 'password', 'role'],
     where: {
-      kode_pendaftaran: req.body.kode_pendaftaran,
+      kode_pendaftaran: kode_pendaftaran,
+      deleted_at: {
+        [Op.is]: null,
+      },
     },
   })
   if (!user) return res.status(404).json({ msg: 'User tidak ditemukan' })
 
-  const match = await argon2.verify(user.password, req.body.password)
+  const match = await argon2.verify(user.password, password)
   if (!match) return res.status(400).json({ msg: 'Password salah' })
 
   req.session.userId = user.uuid

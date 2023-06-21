@@ -11,7 +11,7 @@ import { verifyUser, adminOnly } from '../middleware/AuthUser.js'
 
 const router = express.Router()
 
-router.get('/get-rls', verifyUser, getRls)
+router.get('/get-rls', getRls)
 router.get('/get-rlsbyid', verifyUser, getRlsById)
 router.get('/get-rlsbydata', verifyUser, getRlsByData)
 router.post('/add-rls', verifyUser, adminOnly, addRls)

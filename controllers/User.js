@@ -83,6 +83,7 @@ export const getUserById = async (req, res) => {
 export const addUser = async (req, res) => {
   const { kode_pendaftaran, nama_user, password, confPassword, no_hp, role } =
     req.body
+
   if (password !== confPassword)
     return res
       .status(400)

@@ -10,7 +10,7 @@ import { verifyUser, adminOnly } from '../middleware/AuthUser.js'
 
 const router = express.Router()
 
-router.get('/get-hpt', verifyUser, getHpt)
+router.get('/get-hpt', getHpt)
 router.get('/get-hptbyid', verifyUser, getHptById)
 router.post('/add-hpt', verifyUser, adminOnly, addHpt)
 router.post('/edit-hpt', verifyUser, adminOnly, editHpt)

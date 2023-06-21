@@ -36,7 +36,7 @@ const Users = db.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [2, 100],
+        len: [1, 100],
       },
     },
     password: {

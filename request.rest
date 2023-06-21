@@ -3,8 +3,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "kode_pendaftaran" : "1",
-    "password" : "user1"
+    "kode_pendaftaran" : "A2",
+    "password" : "ali"
 }
 
 ###
