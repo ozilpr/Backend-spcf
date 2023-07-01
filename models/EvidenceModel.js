@@ -1,9 +1,5 @@
-import {
-  // ForeignKeyConstraintError,
-  Sequelize,
-} from 'sequelize'
+import { Sequelize } from 'sequelize'
 import db from '../config/Database.js'
-// import Rules from './RulesModel.js'
 
 const { DataTypes } = Sequelize
 

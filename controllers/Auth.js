@@ -1,5 +1,3 @@
-// import { conn } from '../config/Database.js'
-// import axios from 'axios'
 import argon2 from 'argon2'
 import { Op } from 'sequelize'
 import User from '../models/UserModel.js'

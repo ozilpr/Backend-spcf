@@ -3,7 +3,6 @@ import {
   getUser,
   getUserById,
   getUserByFirstLetter,
-  // getUserByUuid,
   addUser,
   editUser,
   deleteUser,
@@ -20,8 +19,6 @@ router.get(
   adminOnly,
   getUserByFirstLetter
 )
-// router.get('/get-userbykodereg', getUserByKodeReg)
-// router.get('/get-userbyuuid', getUserByUuid)
 router.post('/add-user', verifyUser, adminOnly, addUser)
 router.post('/edit-user', verifyUser, adminOnly, editUser)
 router.post('/delete-user', verifyUser, adminOnly, deleteUser)

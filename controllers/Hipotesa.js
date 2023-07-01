@@ -1,4 +1,3 @@
-// import { conn } from '../config/Database.js'
 import Hipotesa from '../models/HipotesaModel.js'
 import { Op } from 'sequelize'
 

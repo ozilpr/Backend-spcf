@@ -1,4 +1,3 @@
-// import { conn } from '../config/Database.js'
 import Evidences from '../models/EvidenceModel.js'
 import { Op } from 'sequelize'
 
@@ -130,15 +129,4 @@ export const restoreEvd = async (req, res) => {
   } catch (error) {
     res.status(400).json({ msg: error.message })
   }
-  // const id = req.query.id
-  // const now = new Date()
-  // const querySTR = 'update tbl_gejala set deleted_at is null where id = ?'
-  // const values = [now, id]
-  // conn.query(querySTR, values, (err, results) => {
-  //   if (!err) {
-  //     res.status(200).json(results)
-  //   } else {
-  //     res.status(400).json({ msg: 'Tidak dapat mengembalikan gejala' })
-  //   }
-  // })
 }

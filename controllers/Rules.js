@@ -219,7 +219,6 @@ export const editRls = async (req, res) => {
     }
   }
 
-  // return res.json({ first, second })
   try {
     if (!second) {
       return await update()

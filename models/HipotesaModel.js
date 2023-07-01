@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize'
-// import Rules from './RulesModel.js'
 import db from '../config/Database.js'
 
 const { DataTypes } = Sequelize
@@ -35,18 +34,10 @@ const Hipotesa = db.define(
     detail_penyakit: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        notEmpty: false,
-        len: [2, 200],
-      },
     },
     sm_penyakit: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        notEmpty: false,
-        len: [2, 200],
-      },
     },
     deleted_at: {
       type: DataTypes.DATE,
