@@ -43,9 +43,9 @@ export const getUserByFirstLetter = async (req, res) => {
       ],
       where: {
         nama_user: { [Op.startsWith]: letter },
-        deleted_at: {
-          [Op.is]: null,
-        },
+        // deleted_at: {
+        //   [Op.is]: null,
+        // },
       },
     })
     res.status(200).json(response.length + 1)
