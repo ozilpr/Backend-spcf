@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   getHpt,
+  getAllHpt,
   getHptById,
   addHpt,
   editHpt,
@@ -11,6 +12,7 @@ import { verifyUser, adminOnly } from '../middleware/AuthUser.js'
 const router = express.Router()
 
 router.get('/get-hpt', getHpt)
+router.get('/get-allhpt', getAllHpt)
 router.get('/get-hptbyid', verifyUser, getHptById)
 router.post('/add-hpt', verifyUser, adminOnly, addHpt)
 router.post('/edit-hpt', verifyUser, adminOnly, editHpt)

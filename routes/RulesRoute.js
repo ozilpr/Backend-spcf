@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   getRls,
+  getAllRls,
   getRlsById,
   getRlsByData,
   addRls,
@@ -12,6 +13,7 @@ import { verifyUser, adminOnly } from '../middleware/AuthUser.js'
 const router = express.Router()
 
 router.get('/get-rls', getRls)
+router.get('/get-allrls', getAllRls)
 router.get('/get-rlsbyid', verifyUser, getRlsById)
 router.get('/get-rlsbydata', verifyUser, getRlsByData)
 router.post('/add-rls', verifyUser, adminOnly, addRls)

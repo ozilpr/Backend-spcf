@@ -32,6 +32,34 @@ export const getRls = async (req, res) => {
   }
 }
 
+//Read
+export const getAllRls = async (req, res) => {
+  try {
+    const rules = await Rules.findAll({
+      attributes: ['kode_rule'],
+      // where: {
+      //   deleted_at: {
+      //     [Op.is]: null,
+      //   },
+      // },
+      // include: [
+      //   {
+      //     model: Evidences,
+      //     attributes: ['nama_gejala'],
+      //   },
+      //   {
+      //     model: Hipotesa,
+      //     attributes: ['nama_penyakit'],
+      //   },
+      // ],
+      // order: [['penyakit_id'], ['gejala_id']],
+    })
+    res.status(200).json(rules)
+  } catch (error) {
+    res.status(500).json({ msg: error.message })
+  }
+}
+
 //Read by Id
 export const getRlsById = async (req, res) => {
   try {

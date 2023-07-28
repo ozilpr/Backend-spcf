@@ -24,6 +24,23 @@ export const getHpt = async (req, res) => {
   }
 }
 
+//Read
+export const getAllHpt = async (req, res) => {
+  try {
+    const hpt = await Hipotesa.findAll({
+      attributes: ['penyakit_id'],
+      // where: {
+      //   deleted_at: {
+      //     [Op.is]: null,
+      //   },
+      // },
+    })
+    res.status(200).json(hpt)
+  } catch (error) {
+    res.status(404).json({ msg: error.message })
+  }
+}
+
 //Read by Id
 export const getHptById = async (req, res) => {
   const { id } = req.query

@@ -18,6 +18,23 @@ export const getEvd = async (req, res) => {
   }
 }
 
+//Read
+export const getAllEvd = async (req, res) => {
+  try {
+    const evd = await Evidences.findAll({
+      attributes: ['gejala_id'],
+      // where: {
+      //   deleted_at: {
+      //     [Op.is]: null,
+      //   },
+      // },
+    })
+    res.status(200).json(evd)
+  } catch (error) {
+    res.status(404).json({ msg: error.message })
+  }
+}
+
 //Read by Id
 export const getEvdById = async (req, res) => {
   const { id } = req.query

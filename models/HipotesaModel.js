@@ -32,11 +32,11 @@ const Hipotesa = db.define(
       },
     },
     detail_penyakit: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('medium'),
       allowNull: true,
     },
     sm_penyakit: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('medium'),
       allowNull: true,
     },
     deleted_at: {
