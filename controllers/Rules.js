@@ -85,10 +85,20 @@ export const getRlsById = async (req, res) => {
         {
           model: Evidences,
           attributes: ['nama_gejala'],
+          where: {
+            deleted_at: {
+              [Op.is]: null,
+            },
+          },
         },
         {
           model: Hipotesa,
           attributes: ['nama_penyakit'],
+          where: {
+            deleted_at: {
+              [Op.is]: null,
+            },
+          },
         },
       ],
     })
