@@ -18,10 +18,20 @@ export const getRls = async (req, res) => {
         {
           model: Evidences,
           attributes: ['nama_gejala'],
+          where: {
+            deleted_at: {
+              [Op.is]: null,
+            },
+          },
         },
         {
           model: Hipotesa,
           attributes: ['nama_penyakit'],
+          where: {
+            deleted_at: {
+              [Op.is]: null,
+            },
+          },
         },
       ],
       order: [['penyakit_id'], ['gejala_id']],
